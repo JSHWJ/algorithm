@@ -1,3 +1,6 @@
+package basic;
+
+
 public class 가위바위보 {
     public String solution(String rsp) {
         StringBuilder result = new StringBuilder();
