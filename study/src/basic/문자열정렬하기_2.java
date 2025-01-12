@@ -1,7 +1,7 @@
 package basic;
 import java.util.stream.Collectors;
 
-public class 문자열정렬하기 {
+public class 문자열정렬하기_2 {
     public String solution(String my_string) {
         
         String new_string = my_string.chars()
