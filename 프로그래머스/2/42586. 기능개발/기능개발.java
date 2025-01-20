@@ -26,13 +26,9 @@ class Solution {
         
         result.add(count); //큐의 size가 0이 되었을 때 while문에서 count는 저장되지 않기 때문에 필요함.
         
-        if(result.size() == 1){
-            int[] answer = new int[]{result.get(0)};
-            return answer;
-        } else{
-            return result.stream()
+        return result.stream()
                 .mapToInt(Integer::intValue)
                 .toArray();
-        }
+        
     }
 }
