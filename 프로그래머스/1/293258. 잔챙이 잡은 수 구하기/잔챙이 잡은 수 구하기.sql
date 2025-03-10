@@ -1,0 +1,3 @@
+select count(ID) as FISH_COUNT
+from FISH_INFO
+WHERE LENGTH <= 10 OR LENGTH IS NULL;
