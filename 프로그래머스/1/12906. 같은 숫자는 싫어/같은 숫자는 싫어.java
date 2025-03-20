@@ -5,17 +5,15 @@ public class Solution {
         Stack<Integer> stack = new Stack<>();
         stack.push(arr[0]);
         
-        for(int a : arr){
-            if(stack.peek() == a){
-                continue;
-            }
-            stack.push(a);
+        for(int i : arr){
+            if(!stack.isEmpty()){
+                if(stack.peek() != i){
+                    stack.push(i);
+                }
+            } else break;
         }
         
-        int[] result = stack.stream()
-            .mapToInt(Integer::intValue)
-            .toArray();
-        
-        return result;
+        return stack.stream().mapToInt(Integer::intValue).toArray();
     }
 }
+
