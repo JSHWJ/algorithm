@@ -2,35 +2,35 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        Queue<Integer> queue = new LinkedList<>(); 
-        List<Integer> result = new ArrayList<>();
-        
+        Queue<Integer> queue = new LinkedList<>();
+        List<Integer> list = new ArrayList<>();
+          
         for(int i = 0; i < progresses.length; i++){
-            double temp = (100 - progresses[i]) / (double)speeds[i];
-            queue.offer((int) Math.ceil(temp)); // Math.ceil은 항상 반환값이 double임
+            int num = (int) Math.ceil((100.0 - progresses[i]) / speeds[i]);
+            queue.offer(num);
         }
         
-        int count = 1;
-        int max = queue.poll();
+        int day = queue.poll();
+        int r = 1; // 배포되는 작업의 수
         
-        while(queue.peek() != null){
-            if(max >= queue.peek()){
-                queue.poll();
-                count++;
-                continue;
+        while(!queue.isEmpty()){
+            int temp = queue.poll();
+            if(temp > day){
+                day = temp;
+                list.add(r);
+                r = 1;
+            } else {
+                r++;
             }
-            result.add(count);
-            count = 1;
-            max = queue.poll();
         }
         
-        result.add(count); //큐의 size가 0이 되었을 때 while문에서 count는 저장되지 않기 때문에 필요함.
+        list.add(r);
         
-        return result.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+        return list.stream()
+            .mapToInt(Integer::intValue)
+            .toArray();
         
-    }
+}
 }
 
 /*
