@@ -3,35 +3,38 @@ import java.util.stream.*;
 
 class Solution {
     public int solution(int n, int[] lost, int[] reserve) {
-        Arrays.sort(lost);
-        Arrays.sort(reserve);
-        
-        Set<Integer> lostSet = new HashSet<>();
-        Set<Integer> reserveSet = new HashSet<>();
+        List<Integer> lostPeople = new ArrayList<>();
+        List<Integer> reservePeople = new ArrayList<>();
         
         for(int l : lost){
-            lostSet.add(l);
+            lostPeople.add(l);
         }
         
         for(int r : reserve){
-            reserveSet.add(r);
+            reservePeople.add(r);
         }
         
-        for(int r : reserve){
-            if(lostSet.contains(r)){
-                reserveSet.remove(Integer.valueOf(r));
-                lostSet.remove(Integer.valueOf(r));
-            }
-        } // 여벌 옷이 있는, 도난 당한 학생은 자신의 옷을 입는다
+        Collections.sort(lostPeople);
+        Collections.sort(reservePeople);
         
-        for(int s : reserveSet){
-            if(lostSet.contains(s - 1)){
-                lostSet.remove(Integer.valueOf(s - 1));
-            } else if(lostSet.contains(s + 1)){
-                lostSet.remove(Integer.valueOf(s + 1));
+        Iterator<Integer> iterator = reservePeople.iterator();
+        while(iterator.hasNext()){
+            int p = iterator.next();
+            if(lostPeople.contains(p)){
+                iterator.remove(); 
+                lostPeople.remove(Integer.valueOf(p));
             }
         }
         
-        return n - lostSet.size();
+        
+        for(int p : reservePeople){
+            if(lostPeople.contains(p - 1)){
+                lostPeople.remove(Integer.valueOf(p - 1));
+            } else if(lostPeople.contains(p + 1)){
+                lostPeople.remove(Integer.valueOf(p + 1));
+            }
+        }
+        
+        return n - lostPeople.size();
     }
 }
