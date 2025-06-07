@@ -3,33 +3,38 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
         Queue<Integer> queue = new LinkedList<>();
-        
-        List<Integer> answer = new ArrayList<>();
-        
+        List<Integer> list = new ArrayList<>();
+          
         for(int i = 0; i < progresses.length; i++){
-            int day = (int) Math.ceil((100 - progresses[i]) / (float) speeds[i]);
-            queue.offer(day);
+            int num = (int) Math.ceil((100.0 - progresses[i]) / speeds[i]);
+            queue.offer(num);
         }
         
-        int num = queue.poll();
-        int count = 1;
+        int day = queue.poll();
+        int r = 1; // 배포되는 작업의 수
         
         while(!queue.isEmpty()){
-            if(queue.peek() <= num){ // num 보다 미리 다 끝낸 경우라면
-                queue.poll();
-                count++;
-            } else { // num보다 오래 걸리는 경우에
-                answer.add(count);
-                num = queue.poll(); 
-                count = 1;
+            int temp = queue.poll();
+            if(temp > day){
+                day = temp;
+                list.add(r);
+                r = 1;
+            } else {
+                r++;
             }
         }
         
-        answer.add(count);
+        list.add(r);
         
-        return answer.stream()
+        return list.stream()
             .mapToInt(Integer::intValue)
             .toArray();
-    }
+        
+}
 }
 
+/*
+    큐가 아니라 그냥 int[]로 해결이 가능한 문제였음
+    * int[] result : 100에서 기능 진도 빼고 스피드 값으로 나눈 값들의 배열
+
+*/
