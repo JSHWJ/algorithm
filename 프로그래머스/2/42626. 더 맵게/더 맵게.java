@@ -3,6 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(int[] scoville, int K) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
+        // 만약에 큰 수부터 나오게 하고 싶으면 new PriorityQueue<>(Collections.reverseOrder());
         int answer = 0;
         
         for(int s : scoville){
@@ -21,7 +22,6 @@ class Solution {
             return -1;
         }
         
-        return answer;
-        
+        return answer++;
     }
 }
