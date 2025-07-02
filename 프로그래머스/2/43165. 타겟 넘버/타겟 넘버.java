@@ -2,23 +2,24 @@ class Solution {
     int answer = 0;
     
     public int solution(int[] numbers, int target){
-        dfs(numbers, target, 0 ,0);
+        dfs(numbers, 0, 0, target);
         return answer;
     }
     
-    public void dfs(int[] numbers, int target, int depth, int sum){
+    public void dfs(int[] numbers, int depth, int sum, int target){
         if(numbers.length == depth){
-            if(target == sum){
+            if(sum == target){
                 answer++;
-            } 
+            }
             return;
         }
         
-        dfs(numbers, target, depth + 1, sum + numbers[depth]);
-        dfs(numbers, target, depth + 1, sum - numbers[depth]);
+        dfs(numbers, depth + 1, sum + numbers[depth], target);
+        dfs(numbers, depth + 1, sum - numbers[depth], target);
     }
+
 
 
 }
 
-// dfs : 깊이 우선 탐색 
+
